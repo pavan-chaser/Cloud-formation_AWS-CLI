@@ -13,7 +13,7 @@
             "Type": "String"
         }
 		"SecurityGroup": {
-			"Type" : "CommaDelimitedList"
+			"Type" : "String"
 		},
         "SubnetId": {
           	"Type": "String"
