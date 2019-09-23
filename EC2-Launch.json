@@ -2,78 +2,56 @@
 	"AWSTemplateFormatVersion": "2010-09-09",
 	"Description": "",
 	"Parameters": {
-		"IAMRole": {
+		"Name": {
 			"Type": "String"
 		},
 		"InstanceType": {
 			"Type": "String"
 		},
 		"AMIId": {
-			"Description": "Please enter the AMI Id",
-			"Type": "String"
-		},
+		    "Description": "Please enter the AMI Id",
+            "Type": "String"
+        }
 		"SecurityGroup": {
-			"Type": "CommaDelimitedList"
+			"Type" : "String"
 		},
-		"SubnetId": {
-			"Type": "String"
-		},
-		"Name": {
-			"Type": "String"
-		},
-		"OS": {
-			"Type": "String"
+        "SubnetId": {
+          	"Type": "String"
+        },
+		"VolumeSize": {
+			"Description": "Please enter size of the volume you would like to create",
+			"Type": "Number"
 		},
 		"AvailabilityZone": {
 			"Description": "Availability Zone of the EBS volume you are creating",
 			"Type": "AWS::EC2::AvailabilityZone::Name"
 		},
-
-		"VolumeSize": {
-			"Description": "Please enter size of the volume you would like to create",
-			"Type": "Number"
-		}
-
+			
 	},
 	"Resources": {
 		"EC2Instance": {
 			"Type": "AWS::EC2::Instance",
 			"Properties": {
-				"IamInstanceProfile": {
-					"Ref": "IAMRole"
-				},
 				"InstanceType": {
 					"Ref": "InstanceType"
 				},
 				"ImageId": {
-					"Ref": "AMIId"
-				},
-				"NetworkInterfaces": [{
-					"AssociatePublicIpAddress": "false",
-					"DeviceIndex": "0",
-					"GroupSet": {
-						"Ref": "SecurityGroup"
-					},
-					"SubnetId": {
-						"Ref": "SubnetId"
-					}
-
-				}]
-			}
-		},
-		"NewVolume": {
-			"Type": "AWS::EC2::Volume",
-			"Properties": {
-				"Encrypted": "True",
-				"VolumeType": "gp2",
-				"Size": {
-					"Ref": "VolumeSize"
-				},
-				"AvailabilityZone": {
-					"Ref": "AvailabilityZone"
-				},
+				    "Ref": "AMIId"
+				},				
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "false",
+                        "DeviceIndex": "0",
+                        "GroupSet": {
+                            "Ref": "SecurityGroup"  
+                        },
+						"SubnetId": {
+							"Ref": "SubnetId"
+						}
+					
+                    }
+                ],
 				"Tags": [
-
 					{
 						"Key": "Name",
 						"Value": {
@@ -83,19 +61,35 @@
 				]
 			}
 		},
-		"MountPoint": {
-			"Type": "AWS::EC2::VolumeAttachment",
+		"NewVolume": {
+			"Type": "AWS::EC2::Volume",
 			"Properties": {
-				"InstanceId": {
-					"Ref": "EC2Instance"
+				"VolumeType": "gp2",
+				"Size": {
+					"Ref": "VolumeSize"
 				},
-				"VolumeId": {
-					"Ref": "NewVolume"
+				"AvailabilityZone": {
+					"Ref": "AvailabilityZone"
 				},
-				"Device": "/dev/sdf"
+				"Tags": [
+                    {
+						"Key": "Name",
+						"Value": {
+							"Ref": "Name"
+						}
+					},                         
+				]
 			}
-		}
-	},
+		},
+        "MountPoint" : {
+        "Type" : "AWS::EC2::VolumeAttachment",
+        "Properties" : {
+          "InstanceId" : { "Ref" : "EC2Instance" },
+          "VolumeId"  : { "Ref" : "NewVolume" },
+          "Device" : "/dev/sdf"	
+		  }
+		 }
+    },
 	"Outputs": {
 		"InstanceId": {
 			"Description": "InstanceId of the newly created EC2 instance",
