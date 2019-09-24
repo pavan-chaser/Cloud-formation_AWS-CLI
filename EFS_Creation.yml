@@ -1,0 +1,101 @@
+- name: EFS Setup
+  hosts: localhost
+
+  tasks:
+
+      - ec2_vpc_net:
+          name: "{{ vpc_name }}"
+          cidr_block: "{{ vpc_cidr_block }}"
+          region: "{{ aws_region }}"
+          aws_access_key: "{{ aws_access_key }}"
+          aws_secret_key: "{{ aws_secret_key }}"
+          state: "present"
+        register: my_vpc
+
+      - name: Set VPC ID in variable
+        set_fact:
+          vpc_id: "{{ my_vpc.vpc.id }}"
+
+      - name: Create Public Subnet in AZ1
+        ec2_vpc_subnet:
+           state: "present"
+           vpc_id: "{{ vpc_id }}"
+           cidr: "{{ vpc_public_subnet1_cidr }}"
+           az: "{{ aws_region }}a"
+           region: "{{ aws_region }}"
+           aws_access_key: "{{ aws_access_key }}"
+           aws_secret_key: "{{ aws_secret_key }}"
+           resource_tags:
+                 Name: "EFS_Public_Subnet_AZ1"
+        register: my_public_subnet_EFS_AZ1
+
+      - name: Set AZ1 Subnet ID in variable
+        set_fact:
+          subnet_id_AZ1: "{{ my_public_subnet_EFS_AZ1.subnet.id }}"
+
+      - name: Create Public Subnet in AZ2
+        ec2_vpc_subnet:
+           state: "present"
+           vpc_id: "{{ vpc_id }}"
+           cidr: "{{ vpc_public_subnet2_cidr }}"
+           az: "{{ aws_region }}b"
+           region: "{{ aws_region }}"
+           aws_access_key: "{{ aws_access_key }}"
+           aws_secret_key: "{{ aws_secret_key }}"
+           resource_tags:
+                 Name: "EFS_Public_Subnet_AZ2"
+        register: my_public_subnet_EFS_AZ2
+        
+      - name: Set AZ2 Subnet ID in variable
+        set_fact:
+          subnet_id_AZ2: "{{ my_public_subnet_EFS_AZ2.subnet.id }}"
+      - name: Create Public Subnet in AZ3
+        ec2_vpc_subnet:
+           state: "present"
+           vpc_id: "{{ vpc_id }}"
+           cidr: "{{ vpc_public_subnet3_cidr }}"
+           az: "{{ aws_region }}c"
+           region: "{{ aws_region }}"
+           aws_access_key: "{{ aws_access_key }}"
+           aws_secret_key: "{{ aws_secret_key }}"
+           resource_tags:
+                 Name: "EFS_Public_Subnet_AZ3"
+        register: my_public_subnet_EFS_AZ3
+
+      - name: Set AZ2 Subnet ID in variable
+        set_fact:
+          subnet_id_AZ3: "{{ my_public_subnet_EFS_AZ3.subnet.id }}"
+      - name: Create EFS Security Group
+        ec2_group:
+           name: "EFS SG Access"
+           description: "External SSH Access"
+           vpc_id: "{{ vpc_id }}"
+           region: "{{ aws_region }}"
+           aws_access_key: "{{ aws_access_key }}"
+           aws_secret_key: "{{ aws_secret_key }}"
+           rules:
+            - proto: "tcp"
+              from_port: "2049"
+              to_port: "2049"
+              cidr_ip: "0.0.0.0/0"
+        register: my_efs_sg
+
+      - name: Set EFS SG ID
+        set_fact:
+           efs_sg_id: "{{ my_efs_sg.group_id }}"
+
+
+      - efs:
+         state: present
+         name: My_EFS
+         region: "{{ aws_region }}"
+         aws_access_key: "{{ aws_access_key }}"
+         aws_secret_key: "{{ aws_secret_key }}"
+         tags:
+           name: My_EFS
+           purpose: file-storage
+         targets:
+           - subnet_id: "{{ subnet_id_AZ1 }}"
+           - subnet_id: "{{ subnet_id_AZ2 }}"
+           - subnet_id: "{{ subnet_id_AZ3 }}"
+             security_groups: [ "{{ efs_sg_id }}" ]
