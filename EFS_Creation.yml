@@ -96,6 +96,8 @@
            purpose: file-storage
          targets:
            - subnet_id: "{{ subnet_id_AZ1 }}"
+             security_groups: [ "{{ efs_sg_id }}" ]
            - subnet_id: "{{ subnet_id_AZ2 }}"
+             security_groups: [ "{{ efs_sg_id }}" ]
            - subnet_id: "{{ subnet_id_AZ3 }}"
              security_groups: [ "{{ efs_sg_id }}" ]
