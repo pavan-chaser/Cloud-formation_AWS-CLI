@@ -1,0 +1,13 @@
+---
+- name: Terminate instances
+  hosts: localhost
+  connection: local
+  tasks:
+    
+    - name: Terminate instances Going on
+      ec2:
+        region: '{{ region }}'
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        instance_ids: '{{ instanceids  }}'
+        state: 'absent'
