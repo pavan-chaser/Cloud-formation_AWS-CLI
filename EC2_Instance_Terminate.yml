@@ -2,8 +2,7 @@
 - name: Terminate instances
   hosts: localhost
   connection: local
-  tasks:
-    
+  tasks: 
     - name: Terminate instances Going on
       ec2:
         region: '{{ region }}'
