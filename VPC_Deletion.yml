@@ -8,6 +8,7 @@
         state: absent
         region: "{{ aws_region }}"
         cidr_block: "{{vpc_cidr_block}}"
+        name: "{{ vpc_name }}"
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"      
       register: my_vpc
