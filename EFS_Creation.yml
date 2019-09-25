@@ -108,12 +108,12 @@
 
       - efs:
          state: present
-         name: My_EFS
+         name: "{{ efs_name }}"
          region: "{{ aws_region }}"
          aws_access_key: "{{ aws_access_key }}"
          aws_secret_key: "{{ aws_secret_key }}"
          tags:
-           name: My_EFS
+           name: "{{ efs_name }}"
            purpose: file-storage
          targets:
            - subnet_id: "{{ subnet_id_AZ1 }}"
