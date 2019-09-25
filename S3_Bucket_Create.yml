@@ -13,3 +13,8 @@
            region: "{{ aws_region }}"
            name: "{{ bucket_name }}"
            state: present
+          register: my_s3_creation
+
+        - name: degug subnet name
+          debug:
+            msg: "{{ my_s3_creation }}"

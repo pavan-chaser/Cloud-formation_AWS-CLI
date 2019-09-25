@@ -1,0 +1,16 @@
+- name: S3 Bucket Deletion
+  hosts: localhost
+
+  tasks:
+        - s3_bucket:
+           aws_access_key: "{{ aws_access_key }}"
+           aws_secret_key: "{{ aws_secret_key }}"
+           region: "{{ aws_region }}"
+           name: "{{ bucket_name }}"
+           state: absent
+           force: yes
+          register: my_s3_deletions
+
+        - name: degug s3 bucket deletion
+          debug:
+            msg: "{{ my_s3_deletions }}"
