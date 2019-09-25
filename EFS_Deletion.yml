@@ -1,5 +1,5 @@
 - name: EFS Deletion
-  hosts: all
+  hosts: localhost
 
   tasks:
 
