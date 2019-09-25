@@ -15,20 +15,6 @@
     shell: >
       aws configure set region {{ aws_region }}  
   
-  - name: Setup AWS CLI InternetGatewayId
+  - name: Setup AWS CLI aws_region
     shell: >
-       aws ec2 describe-internet-gateways --filters 'Name=attachment.vpc-id,Values="{{ vpc_id }}"' | grep InternetGatewayId
-    register: InternetGatewayId
-
-  - name: degug InternetGatewayId
-    debug:
-       msg: "{{ InternetGatewayId }}"
-
-  - name: Setup AWS CLI InternetGatewayId
-    shell: >
-       aws ec2 delete-internet-gateway --internet-gateway-id "{{ InternetGatewayId }}"
-    register: InternetGatewayIddelete
-
-  - name: degug delete InternetGatewayId
-    debug:
-       msg: "{{ InternetGatewayIddelete }}"    
+      aws ec2 delete-vpc --vpc-id "{{ vpc_id }}" 
