@@ -22,3 +22,8 @@
       region: "{{ aws_region }}"
       suffix: index.html
       error_key: errors/404.htm
+     register: my_s3_website
+
+   - name: degug s3 bucket deletion
+     debug:
+        msg: "{{ my_s3_website }}"
