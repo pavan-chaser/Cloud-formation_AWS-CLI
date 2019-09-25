@@ -17,4 +17,4 @@
   
   - name: Setup AWS CLI aws_region
     shell: >
-      aws ec2 delete-vpc --vpc-id "{{ vpc_id }}"
+      aws ec2 delete-vpc --all-dependencies --vpc-id "{{ vpc_id }}"
