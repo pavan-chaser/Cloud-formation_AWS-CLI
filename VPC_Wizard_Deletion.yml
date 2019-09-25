@@ -20,6 +20,19 @@
        aws ec2 describe-internet-gateways --filters 'Name=attachment.vpc-id,Values="{{ vpc_id }}"' | grep InternetGatewayId
     register: InternetGatewayId
 
+  - name: Set InternetGatewayId in variable
+    set_fact:
+      my_InternetGatewayId: "{{ InternetGatewayId.gateway_id }}"
+
   - name: degug InternetGatewayId
     debug:
        msg: "{{ InternetGatewayId }}"
+
+  - name: Setup AWS CLI InternetGatewayId
+    shell: >
+       aws ec2 delete-internet-gateway --internet-gateway-id "{{ my_InternetGatewayId }}"
+    register: InternetGatewayIddelete
+
+  - name: degug delete InternetGatewayId
+    debug:
+       msg: "{{ InternetGatewayIddelete }}"    
