@@ -1,0 +1,17 @@
+- name: VPC Deletions
+  hosts: localhost
+
+  tasks:
+
+    - ec2_vpc:
+        state: absent
+        vpc_id: "{{ vpc_id }}"
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: "{{ aws_region }}"
+      register: my_vpc
+
+    - name: degug vpc name
+      debug:
+        msg: "{{ my_vpc }}"
+
