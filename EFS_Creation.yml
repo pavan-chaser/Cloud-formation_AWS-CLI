@@ -12,6 +12,10 @@
           state: "present"
         register: my_vpc
 
+      - name: degug vpc name
+        debug:
+          msg: "{{ my_vpc }}"
+
       - name: Set VPC ID in variable
         set_fact:
           vpc_id: "{{ my_vpc.vpc.id }}"
@@ -29,6 +33,10 @@
                  Name: "EFS_Public_Subnet_AZ1"
         register: my_public_subnet_EFS_AZ1
 
+      - name: degug subnet name
+        debug:
+          msg: "{{ my_public_subnet_EFS_AZ1 }}"
+          
       - name: Set AZ1 Subnet ID in variable
         set_fact:
           subnet_id_AZ1: "{{ my_public_subnet_EFS_AZ1.subnet.id }}"
@@ -49,6 +57,11 @@
       - name: Set AZ2 Subnet ID in variable
         set_fact:
           subnet_id_AZ2: "{{ my_public_subnet_EFS_AZ2.subnet.id }}"
+
+      - name: degug subnet name
+        debug:
+          msg: "{{ my_public_subnet_EFS_AZ2 }}"
+
       - name: Create Public Subnet in AZ3
         ec2_vpc_subnet:
            state: "present"
@@ -65,6 +78,11 @@
       - name: Set AZ2 Subnet ID in variable
         set_fact:
           subnet_id_AZ3: "{{ my_public_subnet_EFS_AZ3.subnet.id }}"
+
+      - name: degug subnet name
+        debug:
+          msg: "{{ my_public_subnet_EFS_AZ3 }}"
+
       - name: Create EFS Security Group
         ec2_group:
            name: "EFS SG Access"
@@ -84,6 +102,9 @@
         set_fact:
            efs_sg_id: "{{ my_efs_sg.group_id }}"
 
+      - name: degug subnet name
+        debug:
+          msg: "{{ my_efs_sg }}"
 
       - efs:
          state: present
@@ -101,3 +122,8 @@
              security_groups: [ "{{ efs_sg_id }}" ]
            - subnet_id: "{{ subnet_id_AZ3 }}"
              security_groups: [ "{{ efs_sg_id }}" ]
+        register: my_efs
+
+      - name: degug subnet name
+        debug:
+          msg: "{{ my_efs }}"

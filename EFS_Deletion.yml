@@ -1,0 +1,13 @@
+- name: EFS Deletion
+  hosts: localhost
+
+  tasks:
+
+  - efs:
+    state: absent
+    name: "{{ EFS_Name }}"
+    register: efs_facts
+  
+  - name: degug # print efs facts
+    debug:
+      msg: "{{ efs_facts }}"
