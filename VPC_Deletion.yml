@@ -3,7 +3,7 @@
 
   tasks:
 
-    - ec2_vpc:
+    - ec2_vpc_net:
         state: absent
         vpc_id: "{{ vpc_id }}"
         aws_access_key: "{{ aws_access_key }}"
