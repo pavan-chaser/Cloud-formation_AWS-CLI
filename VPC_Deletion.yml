@@ -3,7 +3,8 @@
 
   tasks:
 
-    - ec2_vpc_net:
+    - name: delete VPC
+      local_action:
         state: absent
         vpc_id: "{{ vpc_id }}"
         aws_access_key: "{{ aws_access_key }}"
