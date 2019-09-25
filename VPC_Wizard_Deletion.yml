@@ -13,8 +13,31 @@
       
   - name: Setup AWS CLI aws_region
     shell: >
-      aws configure set region {{ aws_region }}  
-  
-  - name: Setup AWS CLI aws_region
+      aws configure set region "{{ aws_region }}""  
+
+  - name: Setup AWS CLI NAT Delete
     shell: >
-      aws ec2 delete-vpc --vpc-id "{{ vpc_id }}" 
+      aws ec2 delete-nat-gateway --nat-gateway-id "{{ nat_id }}"
+    register: nat_delete
+
+  - name: degug NAT delete
+    debug:
+      msg: "{{ nat_delete }}"
+      
+  - name: Setup AWS CLI IGW Delete
+    shell: >
+      aws ec2 delete-internet-gateway --internet-gateway-id "{{ igw_id }}"
+    register: igw_delete
+
+  - name: degug IGW name
+    debug:
+      msg: "{{ igw_delete }}" 
+
+  - name: Setup AWS CLI VPC Delete
+    shell: >
+      aws ec2 delete-vpc --vpc-id "{{ vpc_id }}"
+    register: vpc_delete
+
+  - name: degug VPC Delete
+    debug:
+      msg: "{{ vpc_delete }}" 
