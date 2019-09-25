@@ -8,7 +8,7 @@
     region: "{{ aws_region }}"
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
-    name: "{{ EFS_Name }}"
+    name: "{{ efs_name }}"
     register: efs_facts
   
   - name: degug # print efs facts
