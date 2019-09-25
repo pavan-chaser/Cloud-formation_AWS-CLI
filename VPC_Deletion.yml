@@ -8,7 +8,7 @@
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"    
         name: "{{ vpc_name }}"  
-        cidr_block: "{{ vpc_net_cidr }}".  
+        cidr_block: "{{ vpc_net_cidr }}"  
         region: "{{ aws_region }}"  
         state: absent  
         purge_cidrs: yes  
