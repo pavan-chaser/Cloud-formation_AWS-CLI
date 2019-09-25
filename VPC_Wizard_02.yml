@@ -78,7 +78,7 @@
 
   - name: degug IGW name
     debug:
-    msg: "{{ my_vpc_igw }}"
+      msg: "{{ my_vpc_igw }}"
 
   - name: Setup AWS CLI aws_access_key
     shell: >
