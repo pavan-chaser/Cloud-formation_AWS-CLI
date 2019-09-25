@@ -24,6 +24,8 @@
     debug:
       msg: "{{ nat_delete }}"
 
+  - pause: seconds=30
+
   - name: Setup AWS CLI IGW Delete
     shell: >
       aws ec2 delete-internet-gateway --internet-gateway-id "{{ igw_id }}"
@@ -33,6 +35,8 @@
     debug:
       msg: "{{ igw_delete }}" 
 
+  - pause: seconds=30
+  
   - name: Setup AWS CLI VPC Delete
     shell: >
       aws ec2 delete-vpc --vpc-id "{{ vpc_id }}"
