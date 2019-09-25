@@ -13,7 +13,7 @@
       
   - name: Setup AWS CLI aws_region
     shell: >
-      aws configure set region "{{ aws_region }}""  
+      aws configure set region "{{ aws_region }}"  
 
   - name: Setup AWS CLI NAT Delete
     shell: >
@@ -23,7 +23,7 @@
   - name: degug NAT delete
     debug:
       msg: "{{ nat_delete }}"
-      
+
   - name: Setup AWS CLI IGW Delete
     shell: >
       aws ec2 delete-internet-gateway --internet-gateway-id "{{ igw_id }}"
