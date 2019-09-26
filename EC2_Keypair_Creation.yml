@@ -20,7 +20,7 @@
                - ec2_key
 
           - name: Copy EC2 Key Pair private key locally
-            copy: content="{{ keypair.key.private_key }}" dest={{ ec2_key_store_directory }}New-"{{ keypair_name }}".pem
+            copy: content="{{ keypair.key.private_key }}" dest={{ ec2_key_store_directory }}New-{{ keypair_name }}.pem
             when: "keypair.changed == true"
             tags:
                - ec2_key
