@@ -156,29 +156,29 @@
     set_fact:
       my_elastic_ip: "{{ my_eip_az2.stdout }}"
  
-  - name: Create NAT Gateway Az1
+  - name: Create NAT Gateway az1
     shell: >
       aws ec2 create-nat-gateway \
-      --subnet-id {{ my_public_subnet_az1 }} \
-      --allocation-id {{ my_eip_az1 }} \
+      --subnet-id {{ public_subnet_az1_id }} \
+      --allocation-id {{ my_eip_az1  }} \
       --query NatGateway.NatGatewayId | tr -d '"'
-    register:: my_nat_gateway_az1
+    register: my_nat_gateway_az1
 
-  - name: Set Nat Gateway ID in variable Az1
+  - name: Set Nat Gateway ID in variable az1
     set_fact:
       nat_gateway_az1_id: "{{ my_nat_gateway_az1.stdout }}"
     
-  - name: degug NAT Gateway name Az1
+  - name: degug NAT Gateway name az1
     debug:
       msg: "{{ my_nat_gateway_az1 }}"
 
   - pause: seconds=10
   
-  - name: Create NAT Gateway Az2
+  - name: Create NAT Gateway az2
     shell: >
       aws ec2 create-nat-gateway \
-      --subnet-id {{ my_public_subnet_az2 }} \
-      --allocation-id {{ my_eip_az2 }} \
+      --subnet-id "{{ public_subnet_az2_id }}" \
+      --allocation-id "{{ my_eip_az2 }}" \
       --query NatGateway.NatGatewayId | tr -d '"'
     register: my_nat_gateway_az2
 
