@@ -31,7 +31,7 @@
       aws_access_key: "{{ aws_access_key }}"
       aws_secret_key: "{{ aws_secret_key }}"
       resource_tags:
-        Name: "Public Subnet"
+        Name: "Public Subnet Az1"
     register: my_public_subnet_az1
 
   - name: Set Public Subnet ID az1 in variable
@@ -52,7 +52,7 @@
       aws_access_key: "{{ aws_access_key }}"
       aws_secret_key: "{{ aws_secret_key }}"
       resource_tags:
-        Name: "Private Subnet"
+        Name: "Private Subnet Az1"
     register: my_private_subnet_az1
 
   - name: Set Private Subnet ID az1 in variable
@@ -73,7 +73,7 @@
       aws_access_key: "{{ aws_access_key }}"
       aws_secret_key: "{{ aws_secret_key }}"
       resource_tags:
-        Name: "Public Subnet"
+        Name: "Public Subnet Az2"
     register: my_public_subnet_az2
 
   - name: Set Public Subnet ID az2 in variable
@@ -94,7 +94,7 @@
       aws_access_key: "{{ aws_access_key }}"
       aws_secret_key: "{{ aws_secret_key }}"
       resource_tags:
-        Name: "Private Subnet"
+        Name: "Private Subnet Az2"
     register: my_private_subnet_az2
 
   - name: Set Private Subnet ID az2 in variable
