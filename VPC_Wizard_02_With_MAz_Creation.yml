@@ -159,8 +159,8 @@
   - name: Create NAT Gateway az1
     shell: >
       aws ec2 create-nat-gateway \
-      --subnet-id {{ public_subnet_az1_id }} \
-      --allocation-id {{ my_eip_az1  }} \
+      --subnet-id {{public_subnet_az1_id}} \
+      --allocation-id {{my_eip_az1}} \
       --query NatGateway.NatGatewayId | tr -d '"'
     register: my_nat_gateway_az1
 
@@ -177,8 +177,8 @@
   - name: Create NAT Gateway az2
     shell: >
       aws ec2 create-nat-gateway \
-      --subnet-id "{{ public_subnet_az2_id }}" \
-      --allocation-id "{{ my_eip_az2 }}" \
+      --subnet-id {{public_subnet_az2_id}} \
+      --allocation-id {{my_eip_az2}} \
       --query NatGateway.NatGatewayId | tr -d '"'
     register: my_nat_gateway_az2
 
