@@ -156,6 +156,8 @@
     set_fact:
       my_elastic_ip: "{{ my_eip_az2.stdout }}"
  
+  - pause: seconds=10
+
   - name: Create NAT Gateway az1
     shell: >
       aws ec2 create-nat-gateway \
