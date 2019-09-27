@@ -1,0 +1,17 @@
+- name: Delete AMI for EC2 instance Root Volume
+  hosts: localhost
+
+  tasks:
+
+	- ec2_ami:
+	    aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+		  region: "{{ aws_region }}"
+		  image_id: "{{ image_id }}"
+		  delete_snapshot: True
+		  state: absent
+	  register: ami_result
+
+  - name: degug
+    debug:
+        msg: "{{ ami_result }}"
