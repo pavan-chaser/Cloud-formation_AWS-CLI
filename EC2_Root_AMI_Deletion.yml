@@ -2,15 +2,14 @@
   hosts: localhost
 
   tasks:
-
-	- ec2_ami:
-	    aws_access_key: "{{ aws_access_key }}"
+  - ec2_ami:
+      aws_access_key: "{{ aws_access_key }}"
       aws_secret_key: "{{ aws_secret_key }}"
-		  region: "{{ aws_region }}"
-		  image_id: "{{ image_id }}"
-		  delete_snapshot: True
-		  state: absent
-	  register: ami_result
+      region: "{{ aws_region }}"
+      image_id: "{{ image_id }}"
+      delete_snapshot: True
+      state: absent
+    register: ami_result
 
   - name: degug
     debug:
