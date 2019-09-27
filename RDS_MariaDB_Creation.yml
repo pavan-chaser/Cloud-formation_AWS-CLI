@@ -4,7 +4,7 @@
                                                                   
   tasks:
 
-       - name: INFRASTRUCTURE RDS - MySQL | Create Instance RDS
+       - name: INFRASTRUCTURE RDS - MariaDB | Create Instance RDS
          rds:
             command: create
             instance_name: "{{ rds_instance_name }}"
