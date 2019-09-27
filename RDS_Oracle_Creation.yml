@@ -29,6 +29,7 @@
             vpc_security_groups: "{{ rds_main_sg_id }}"
             backup_retention: "{{ rds_database_backup_retention }}"
             backup_window: "{{ rds_database_backup_window }}"
+            license_model: "{{ rds_licence_mode }}"
             tags:
                    Name: "{{ rds_instance_name }}"
                    env: Development
