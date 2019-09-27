@@ -15,10 +15,6 @@
         wait: yes
         tags:
           Name: "{{ ami_name }}" 
-        device_mapping:
-          - device_name: '/dev/xvda'
-            volume_type: 'gp2'
-            delete_on_termination: true
       register: ami_result
       
     - name: degug
