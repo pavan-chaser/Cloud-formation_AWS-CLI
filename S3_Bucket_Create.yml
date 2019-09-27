@@ -1,11 +1,6 @@
 - name: Create a S3 Bucket
   hosts: localhost
 
-  vars:
-      aws_access_key: AKIA3TTO5JMRGCHE4A7P
-      aws_secret_key: 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
-      aws_region: ap-south-1
-      bucket_name: etechbraindemo
   tasks:
         - s3_bucket:
            aws_access_key: "{{ aws_access_key }}"
