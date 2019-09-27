@@ -1,0 +1,39 @@
+---                                                           
+- hosts: localhost                                            
+  gather_facts: no                                            
+                                                                  
+  tasks:
+
+       - name: INFRASTRUCTURE RDS - Postgres DB | Create Instance RDS
+         rds:
+            command: create
+            instance_name: "{{ rds_instance_name }}"
+            wait: yes
+            wait_timeout: 3600
+            aws_access_key: "{{ aws_access_key }}"
+            aws_secret_key: "{{ aws_secret_key }}"
+            db_engine: "{{ rds_database_engine }}"
+            db_name: "{{ rds_database_name }}"
+            engine_version: "{{ rds_database_version }}"
+            size: "{{ rds_database_size }}"
+            instance_type: "{{ rds_database_instance_type }}"
+            username: "{{ rds_root_username }}"
+            password: "{{ rds_root_password }}"
+            multi_zone: "{{ rds_database_multi_zone }}"
+            maint_window: "{{ rds_database_maint_window }}"
+            option_group: "{{ rds_database_option_group }}"
+            port: "{{ rds_database_port }}"
+            publicly_accessible: "{{ rds_database_publicly_accessible }}"
+            region: "{{ rds_database_region }}"
+            upgrade: "{{ rds_database_upgrade }}"
+            vpc_security_groups: "{{ rds_main_sg_id }}"
+            backup_retention: "{{ rds_database_backup_retention }}"
+            backup_window: "{{ rds_database_backup_window }}"
+            tags:
+                   Name: "{{ rds_instance_name }}"
+                   env: Development
+         register: rds_create_gathering
+
+       - name: degug rds_param_create name
+         debug:
+            msg: "{{ rds_create_gathering }}"
