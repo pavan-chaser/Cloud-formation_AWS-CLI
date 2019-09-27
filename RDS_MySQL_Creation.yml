@@ -8,8 +8,8 @@
          rds:
             command: create
             instance_name: "{{ rds_instance_name }}"
-            wait: yes
-            wait_timeout: 3600
+            #wait: yes
+            #wait_timeout: 3600
             aws_access_key: "{{ aws_access_key }}"
             aws_secret_key: "{{ aws_secret_key }}"
             db_engine: "{{ rds_database_engine }}"
