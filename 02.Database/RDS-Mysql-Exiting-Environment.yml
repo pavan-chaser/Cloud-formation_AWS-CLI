@@ -1,7 +1,8 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: 'This CloudFormation script provisions a RDS instance(s). '
-
+Description: |
+ This CloudFormation script provisions a RDS instance(s).
+ This playbook Created by Singaravelan.P @ Minfy Technologies
 
 Parameters:
 
