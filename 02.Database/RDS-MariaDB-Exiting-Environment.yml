@@ -1,7 +1,7 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 Description: |
- This CloudFormation script provisions a RDS - MySQL instance(s).
+ This CloudFormation script provisions a RDS instance(s).
  This playbook Created by Singaravelan.P @ Minfy Technologies
 
 Parameters:
@@ -100,18 +100,8 @@ Parameters:
   Engine:
     Description: The name of the database engine to be used for this instance.
     Type: String
-    Default: 'mysql'
-    ConstraintDescription: " mysql engine for the RDS instance."
-
-  DBEngineVersion:
-    Description: The name of the database engine to be used for this instance.
-    Type: String
-    Default: '5.7.26'
-    AllowedValues:
-      - 5.7.26
-      - 5.7.25
-      - 5.7.24    
-    ConstraintDescription: " mysql engine for the RDS instance."
+    Default: 'mariadb'
+    ConstraintDescription: " mariadb engine for the RDS instance."
 
   DBSubnet1:
     Description: A DB subnet group to associate with the DB instance. 
@@ -162,7 +152,7 @@ Resources:
     Type: "AWS::RDS::DBParameterGroup"
     Properties: 
       Description: Prisma DB parameter group 
-      Family: MySQL5.7
+      Family: mariadb10.2
       Parameters:
         max_connections: 300
                 
