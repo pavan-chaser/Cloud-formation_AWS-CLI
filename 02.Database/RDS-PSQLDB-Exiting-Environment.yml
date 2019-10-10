@@ -183,14 +183,13 @@ Resources:
       DBName: !Ref DBName
       Engine: !Ref Engine
       EngineVersion: !Ref DBEngineVersion
-      PubliclyAccessible: !Ref 'DBPubliclyAccessible'
+      PubliclyAccessible: !Ref DBPubliclyAccessible
       DBSubnetGroupName: !Ref DatabaseSubnetGroup
       VPCSecurityGroups: !Ref VPCSecurityGroups
       MasterUsername: !Ref MasterUsername
       MasterUserPassword: !Ref MasterUserPassword
       MonitoringInterval: 0 
-      MultiAZ: !Ref MultiAZ
-      PubliclyAccessible: !Ref DBPubliclyAccessible 
+      MultiAZ: !Ref MultiAZ 
       StorageType: gp2
       Tags:
         - Key: Name
